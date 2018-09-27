@@ -11,7 +11,8 @@ HEADERS = {
     'content-type': 'application/x-www-form-urlencoded',
     'accept': '*/*',
     'Referer': 'http://www.uooconline.com/home/learn/index',
-    'Connection': 'keep-alive'
+    'Connection': 'keep-alive',
+    'Cookie': '' # 手动填充登录后的Cookie字符串至此行即可使用
 }
 
 Data = {
@@ -40,30 +41,33 @@ LOGIN_DATA = {
 session = requests.Session()
 session.headers = HEADERS
 
-while True:
-    print("请输入邮箱账号")
-    account: str = input()
-    LOGIN_DATA['account'] = account
-    print("请输入密码")
-    password = input()
-    LOGIN_DATA['password'] = password
-
-    # 模拟登录
-    r = session.post(LOGIN_URL, LOGIN_DATA)
-    print('登录中。。。。')
-    login_js = json.loads(r.text)
-    if login_js['code'] == 600:
-        print("账号或密码不正确，请重新输入。")
-    else:
-        break
-
-# 清除命令行内容
-os.system('cls')
+# 登录选项，由于uooc的登录模式更改暂时无法使用，可以直接更改header中cookie
+#
+# while True:
+#     print("请输入邮箱账号")
+#     account: str = input()
+#     LOGIN_DATA['account'] = account
+#     print("请输入密码")
+#     password = input()
+#     LOGIN_DATA['password'] = password
+#
+#     # 模拟登录
+#     r = session.post(LOGIN_URL, LOGIN_DATA)
+#     print('登录中。。。。')
+#     login_js = json.loads(r.text)
+#     if login_js['code'] == 600:
+#         print("账号或密码不正确，请重新输入。")
+#     else:
+#         break
+#
+# # 清除命令行内容
+# os.system('cls')
 
 # # 调试使用：直接登录
 # r = session.post(LOGIN_URL, LOGIN_DATA)
 
 # 获取课程列表
+
 r = session.get(LIST_URL)
 list_js = json.loads(r.text)
 
@@ -118,6 +122,7 @@ while True:
     id = cur['id']
     name = cur['name']
     test = 0
+    print("\n")
     print("当前进度为：", cur['name'])
     # print(cur)
     if cur['task_id'] != 0:
@@ -192,7 +197,6 @@ while True:
                 print("\r正在观看: %s--> %s s" % (name, video_pos-i), end="")
                 sys.stdout.flush()
                 time.sleep(1)
-    print()
 
 if test == 1:
     os.system('echo msgbox "目前进度为测验，请自己动手吧 ：）",vbokonly+48,"消息" > a.vbs')
