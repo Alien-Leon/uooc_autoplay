@@ -12,7 +12,7 @@ HEADERS = {
     'accept': '*/*',
     'Referer': 'http://www.uooconline.com/home/learn/index',
     'Connection': 'keep-alive',
-    'Cookie': '_uab_collina=153823323778047894004523; account=305141121@qq.com; examRemindNum_1308638451=1; cerRemindNum_1308638451=1; JSESSID=6ponqlfa9hvbqdralrtbu18ck2; uooc_auth=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZW1lbWJlciI6ZmFsc2UsImxvZ2luX2hvc3QiOiJ3d3cudW9vY29ubGluZS5jb20iLCJzdWIiOiIzNTQxMiIsImV4cCI6MTU0MzkwNzA2M30.eVBNQ-MRUO_3otaE7soqMH94F1Yn-eG5IM0evCqJucE; examRemindNum_1856612603=1; cerRemindNum_1856612603=1; Hm_lvt_7c307a902207c45c0eaf86510e2c24a1=1540463160,1540644487,1541232788,1541314954; Hm_lpvt_7c307a902207c45c0eaf86510e2c24a1=1541315077; formpath=/home/learn/index; formhash=/1856612603/1775234175/39318166' # 手动填充登录后的Cookie字符串至此行即可使用
+    'Cookie': '' # 手动填充登录后的Cookie字符串至此行即可使用
 }
 
 Data = {
