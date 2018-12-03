@@ -11,7 +11,8 @@ HEADERS = {
     'content-type': 'application/x-www-form-urlencoded',
     'accept': '*/*',
     'Referer': 'http://www.uooconline.com/home/learn/index',
-    'Connection': 'keep-alive'
+    'Connection': 'keep-alive',
+    'Cookie': '_uab_collina=153823323778047894004523; account=305141121@qq.com; examRemindNum_1308638451=1; cerRemindNum_1308638451=1; JSESSID=6ponqlfa9hvbqdralrtbu18ck2; uooc_auth=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZW1lbWJlciI6ZmFsc2UsImxvZ2luX2hvc3QiOiJ3d3cudW9vY29ubGluZS5jb20iLCJzdWIiOiIzNTQxMiIsImV4cCI6MTU0MzkwNzA2M30.eVBNQ-MRUO_3otaE7soqMH94F1Yn-eG5IM0evCqJucE; examRemindNum_1856612603=1; cerRemindNum_1856612603=1; Hm_lvt_7c307a902207c45c0eaf86510e2c24a1=1540463160,1540644487,1541232788,1541314954; Hm_lpvt_7c307a902207c45c0eaf86510e2c24a1=1541315077; formpath=/home/learn/index; formhash=/1856612603/1775234175/39318166' # 手动填充登录后的Cookie字符串至此行即可使用
 }
 
 Data = {
@@ -40,30 +41,33 @@ LOGIN_DATA = {
 session = requests.Session()
 session.headers = HEADERS
 
-while True:
-    print("请输入邮箱账号")
-    account: str = input()
-    LOGIN_DATA['account'] = account
-    print("请输入密码")
-    password = input()
-    LOGIN_DATA['password'] = password
-
-    # 模拟登录
-    r = session.post(LOGIN_URL, LOGIN_DATA)
-    print('登录中。。。。')
-    login_js = json.loads(r.text)
-    if login_js['code'] == 600:
-        print("账号或密码不正确，请重新输入。")
-    else:
-        break
-
-# 清除命令行内容
-os.system('cls')
+# 登录选项，由于uooc的登录模式更改暂时无法使用，可以直接更改header中cookie
+#
+# while True:
+#     print("请输入邮箱账号")
+#     account: str = input()
+#     LOGIN_DATA['account'] = account
+#     print("请输入密码")
+#     password = input()
+#     LOGIN_DATA['password'] = password
+#
+#     # 模拟登录
+#     r = session.post(LOGIN_URL, LOGIN_DATA)
+#     print('登录中。。。。')
+#     login_js = json.loads(r.text)
+#     if login_js['code'] == 600:
+#         print("账号或密码不正确，请重新输入。")
+#     else:
+#         break
+#
+# # 清除命令行内容
+# os.system('cls')
 
 # # 调试使用：直接登录
 # r = session.post(LOGIN_URL, LOGIN_DATA)
 
 # 获取课程列表
+
 r = session.get(LIST_URL)
 list_js = json.loads(r.text)
 
@@ -118,6 +122,7 @@ while True:
     id = cur['id']
     name = cur['name']
     test = 0
+    print("\n")
     print("当前进度为：", cur['name'])
     # print(cur)
     if cur['task_id'] != 0:
@@ -192,7 +197,6 @@ while True:
                 print("\r正在观看: %s--> %s s" % (name, video_pos-i), end="")
                 sys.stdout.flush()
                 time.sleep(1)
-    print()
 
 if test == 1:
     os.system('echo msgbox "目前进度为测验，请自己动手吧 ：）",vbokonly+48,"消息" > a.vbs')
